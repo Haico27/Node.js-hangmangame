@@ -14,3 +14,16 @@ function wrongGuessCount(word, guesses) {
 }
 
 console.log("test wrong guesses: ", wrongGuessCount("hello", [ "e", "d", "x", "o" ]))
+
+//Step two: write a function that takes a word and a list of guesses, and returns a string with dashes or letters with spaces in between
+function showGuess(word, guesses) {
+  var wordInLetters = word.split("")// returns an array of letters -> ["h", "e", "l", "l", "o"]
+  var dashesLetters = wordInLetters.map(letter => guesses.indexOf(letter) === -1 ? "_" : letter ) //returns an array of the letters, with a dash on the place of the letters that are not yet guessed
+
+  return dashesLetters.join(" ") //transforms the array of strings into 1 string again, with a space in between the letters
+}
+
+console.log(showGuess("hello", [ "l" ]))
+console.log("test show guess 1: ", showGuess("hello", [ "l" ]) === "_ _ l l _")
+console.log(showGuess("hello", [ "l", "e", "d" ]))
+console.log("test show guess 2: ", showGuess("hello", [ "l", "e", "d" ]) === "_ e l l _")
