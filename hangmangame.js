@@ -27,3 +27,14 @@ console.log(showGuess("hello", [ "l" ]))
 console.log("test show guess 1: ", showGuess("hello", [ "l" ]) === "_ _ l l _")
 console.log(showGuess("hello", [ "l", "e", "d" ]))
 console.log("test show guess 2: ", showGuess("hello", [ "l", "e", "d" ]) === "_ e l l _")
+
+
+//Step three: write a function that takes a word and a list of guesses, and returns if the player has won or not
+function isWinner(word, guesses) {
+  //player is winner when array of guesses contains all the letters of the array of word.split
+  var wordArray = word.split("") //returns array of letters of the word
+  return wordArray.filter( letter => guesses.indexOf(letter) === -1 ).length === 0 //the length of the array with guessed letters that are not in the word is 0
+}
+
+console.log("test winner 1: ", isWinner("hello", [ "h", "e", "d", "q", "l", "a", "o" ]) )
+console.log("test winner 2: ", isWinner("hello", [ "e", "d" ]) )
