@@ -38,3 +38,36 @@ function isWinner(word, guesses) {
 
 console.log("test winner 1: ", isWinner("hello", [ "h", "e", "d", "q", "l", "a", "o" ]) )
 console.log("test winner 2: ", isWinner("hello", [ "e", "d" ]) )
+
+
+//Step four: write a function that takes a word and a list of guesses and checks if the player lost, won, or asks for the next letter
+
+
+//to read from the console
+const readline = require('readline')
+const rl = readline.createInterface({ input:process.stdin, output:process.stdout })
+
+function nextWord(word, guesses) {
+  //check if lost --> when wrongGuessCount >= 6
+  if (wrongGuessCount(word, guesses) >= 6)
+    return console.log("You've lost!")
+
+    //check if won
+  if (isWinner(word, guesses))
+    return console.log("Well done, you are the winner!!")
+
+
+  console.log(showGuess(word, guesses))
+
+
+  //ask for the next letter
+  rl.question("next letter? ", answer => {
+    console.log("player wrote: ", answer)
+
+    //function calls itself to keep the game going until player has lost or won. Answer.trim() removes whitespaces from the answer, answer[0] gets the first letter of the answer as a string. So only the first entered letter will count as an answer.
+    nextWord(word, guesses.concat(answer.trim()[0]))
+
+  })
+}
+
+nextWord( "switzerland", [] )
